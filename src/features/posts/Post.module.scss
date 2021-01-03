@@ -1,0 +1,20 @@
+.wrapper {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.content {
+  margin: 0;
+  margin-bottom: 8px;
+}

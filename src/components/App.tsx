@@ -1,57 +1,40 @@
-import Counter from './Counter';
+import { FunctionComponent } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styles from './App.module.scss';
-import logo from '../img/logo.svg';
+import { Header } from './Header';
+import { NotFound } from './NotFound';
+import { AddPostForm } from '../features/posts/AddPostForm';
+import { PostsList } from '../features/posts/PostsList';
+import { SinglePost } from '../features/posts/SinglePost';
+import { EditPostForm } from '../features/posts/EditPostForm';
 
-function App() {
+export const App: FunctionComponent = () => {
   return (
-    <div className={styles.wrapper}>
-      <header className={styles.header}>
-        <img src={logo} className={styles.logo} alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className={styles.link}
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className={styles.link}
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/">
+          <div className={styles.content}>
+            <AddPostForm />
+            <PostsList />
+          </div>
+        </Route>
+        <Route exact path="/post/:postId">
+          <div className={styles.content}>
+            <SinglePost />
+          </div>
+        </Route>
+        <Route exact path="/edit/:postId">
+          <div className={styles.content}>
+            <EditPostForm />
+          </div>
+        </Route>
+        <Route>
+          <div className={styles.content}>
+            <NotFound />
+          </div>
+        </Route>
+      </Switch>
+    </Router>
   );
-}
-
-export default App;
+};

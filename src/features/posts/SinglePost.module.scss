@@ -1,0 +1,37 @@
+.wrapper {
+}
+
+.article {
+}
+
+.title {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 24px;
+}
+
+.content {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.link {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+.button {
+  cursor: pointer;
+  background-color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  margin-right: 6px;
+  color: #fff;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    background-color: #666;
+  }
+}
