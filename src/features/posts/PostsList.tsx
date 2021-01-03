@@ -11,12 +11,14 @@ export const PostsList: FunctionComponent = () => {
     <section className={styles.wrapper}>
       <h1 className={styles.title}>Posts</h1>
       <div className={styles.posts}>
-        {posts
-          .slice()
-          .sort((a, b) => b.date.localeCompare(a.date))
-          .map((post) => (
-            <Post key={post.id} post={post} />
-          ))}
+        {posts.length > 0 ? (
+          posts
+            .slice()
+            .sort((a, b) => b.date.localeCompare(a.date))
+            .map((post) => <Post key={post.id} post={post} />)
+        ) : (
+          <div className={styles.empty}>No posts to show</div>
+        )}
       </div>
     </section>
   );
