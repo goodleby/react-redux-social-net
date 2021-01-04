@@ -1,0 +1,19 @@
+.wrapper {
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &_new {
+    border-color: skyblue;
+  }
+}
+
+.content {
+  margin-bottom: 10px;
+}
+
+.date {
+}

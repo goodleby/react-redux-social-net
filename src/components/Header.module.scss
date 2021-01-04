@@ -1,14 +1,14 @@
 .wrapper {
   padding: 16px 20px;
   background-color: #111;
-  display: flex;
-  justify-content: space-between;
 }
 
 .content {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .title {
@@ -17,7 +17,30 @@
   font-size: 24px;
 }
 
+.button {
+  cursor: pointer;
+  background-color: #ccc;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  margin-right: 6px;
+  color: #222;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    background-color: #666;
+  }
+}
+
 .links {
   display: flex;
   align-items: center;
+}
+
+.link {
+  margin-right: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
 }

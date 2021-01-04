@@ -11,7 +11,7 @@ export type PostProps = {
 };
 
 export const Post: FunctionComponent<PostProps> = ({ post }) => {
-  const { id, title, content, date, userId } = post;
+  const { id, title, content, date, user } = post;
 
   return (
     <article className={styles.wrapper}>
@@ -19,7 +19,7 @@ export const Post: FunctionComponent<PostProps> = ({ post }) => {
         {title}
       </Link>
       <p className={styles.content}>{content.substring(0, 100)}</p>
-      <PostDate date={date} /> <PostAuthor userId={userId} />
+      <PostDate date={date} /> <PostAuthor user={user} />
       <Reactions post={post} />
     </article>
   );

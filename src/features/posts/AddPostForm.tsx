@@ -1,29 +1,42 @@
 import { FunctionComponent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 import styles from './AddPostForm.module.scss';
+import { sendPost } from './postsSlice';
 import { selectUsers } from '../users/usersSlice';
-import { addPost } from './postsSlice';
+import { RootDispatch } from '../../store';
 
 export const AddPostForm: FunctionComponent = () => {
   const users = useSelector(selectUsers);
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [userId, setUserId] = useState(users[0].id);
+  const [user, setUser] = useState('');
+  const [sendStatus, setSendStatus] = useState<'idle' | 'pending'>('idle');
 
-  const dispatch = useDispatch();
+  if (users.length > 0 && user === '') setUser(users[0].id);
+
+  const dispatch = useDispatch<RootDispatch>();
 
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>Add a new post</h2>
       <form
         className={styles.form}
-        onSubmit={(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
-          if (title && content) {
-            dispatch(addPost({ title, content, userId }));
-            setTitle('');
-            setContent('');
+          if (title && content && user && sendStatus === 'idle') {
+            try {
+              setSendStatus('pending');
+              const action = await dispatch(sendPost({ title, content, user }));
+              unwrapResult(action);
+              setTitle('');
+              setContent('');
+            } catch (error) {
+              console.log('Failed to save the post', error);
+            } finally {
+              setSendStatus('idle');
+            }
           }
         }}
       >
@@ -48,8 +61,8 @@ export const AddPostForm: FunctionComponent = () => {
           <span>User:</span>
           <select
             className={styles.input}
-            onChange={(e) => setUserId(e.target.value)}
-            value={userId}
+            onChange={(e) => setUser(e.target.value)}
+            value={user}
           >
             {users.map(({ id, name }) => (
               <option key={id} value={id}>
@@ -58,7 +71,12 @@ export const AddPostForm: FunctionComponent = () => {
             ))}
           </select>
         </label>
-        <button className={styles.button}>Save Post</button>
+        <button
+          className={styles.button}
+          disabled={!(title && content && user && sendStatus === 'idle')}
+        >
+          Save Post
+        </button>
       </form>
     </section>
   );

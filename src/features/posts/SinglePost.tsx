@@ -24,14 +24,14 @@ export const SinglePost: FunctionComponent = () => {
 
   if (!post) return <NotFound />;
 
-  const { id, title, content, date, userId } = post;
+  const { id, title, content, date, user } = post;
 
   return (
     <section className={styles.wrapper}>
       <article className={styles.article}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.content}>{content}</p>
-        <PostDate date={date} /> <PostAuthor userId={userId} />
+        <PostDate date={date} /> <PostAuthor user={user} />
         <Reactions post={post} />
         <button
           className={styles.button}

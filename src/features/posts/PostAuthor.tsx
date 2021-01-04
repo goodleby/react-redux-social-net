@@ -5,15 +5,15 @@ import { selectUsers } from '../users/usersSlice';
 import { PostType } from './postsSlice';
 
 export type PostAuthorProps = {
-  userId?: PostType['userId'];
+  user: PostType['user'];
 };
 
-export const PostAuthor: FunctionComponent<PostAuthorProps> = ({ userId }) => {
-  const user = useSelector(selectUsers).find((user) => user.id === userId);
+export const PostAuthor: FunctionComponent<PostAuthorProps> = ({ user }) => {
+  const author = useSelector(selectUsers).find((item) => item.id === user);
 
   return (
     <div className={styles.wrapper}>
-      by {user ? user.name : 'Unknown author'}
+      by {author ? author.name : 'Unknown author'}
     </div>
   );
 };

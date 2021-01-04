@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
+import { useDispatch } from 'react-redux';
 import styles from './Reactions.module.scss';
 import { PostType, postReactions, addPostReaction } from './postsSlice';
-import { useDispatch } from 'react-redux';
 
 export type ReactionsProps = {
   post: PostType;
